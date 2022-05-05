@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const calificationsController = require('../Controller/calificationsController')
+const qualificationsController = require('../Controller/qualificationsController')
 const { check } = require('express-validator')
 router.post(
   '/',
   [check('literal', 'the literal is required').not().isEmpty()],
-  calificationsController.createCalification
+  qualificationsController.createQualifications
 )
 module.exports = router

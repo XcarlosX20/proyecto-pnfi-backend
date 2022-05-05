@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 4000
 app.use(express.json({ extended: true }))
 app.use('/api/students', require('./Routes/students'))
 app.use('/api/subjects', require('./Routes/subjects'))
-app.use('/api/califications', require('./Routes/califications'))
+app.use('/api/qualifications', require('./Routes/qualifications'))
 app.listen(PORT, () => {
   console.log('listen on port ' + PORT)
 })

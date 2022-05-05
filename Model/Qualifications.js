@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const Califications = mongoose.Schema(
+const Qualifications = mongoose.Schema(
   {
-    literal: {
+    valueObtained: {
       type: String,
       require: true,
       trim: true
@@ -23,7 +23,7 @@ const Califications = mongoose.Schema(
       ref: 'Students'
     },
     Unit: String,
-    Observation: {
+    quote: {
       type: String,
       require: false,
       trim: true
@@ -31,4 +31,4 @@ const Califications = mongoose.Schema(
   },
   { versionKey: false }
 )
-module.exports = mongoose.model('Califications', Califications)
+module.exports = mongoose.model('Qualifications', Qualifications)
