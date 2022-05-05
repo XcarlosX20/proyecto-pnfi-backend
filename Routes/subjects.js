@@ -2,7 +2,7 @@ const express = require('express')
 const subjectController = require('../Controller/subjectController')
 const router = express.Router()
 // student
-router.get('/', subjectController.getSubjects)
+router.get('/:idEstudent', subjectController.getSubjects)
 router.put('/', subjectController.joinToSubject)
 
 // teacher
