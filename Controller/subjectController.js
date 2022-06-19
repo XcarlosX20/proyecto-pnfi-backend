@@ -1,19 +1,28 @@
 const Subjects = require('../Model/Subjects')
 
-exports.getSubjects = async (req, res) => {
+exports.getSubjectsStudents = async (req, res) => {
+  console.log(req.params)
   try {
     const subjectsPerEstudent = await Subjects.find({
-      findStudent: req.params.idEstudent
+      findStudent: req.params.idStudent
     })
     if (!subjectsPerEstudent.length) {
-      res.status(404).json({ msg: 'subjects not found' })
+      return res.status(404).json({ msg: 'subjects not found' })
     }
     res.status(200).json(subjectsPerEstudent)
   } catch (error) {
     console.log(error)
   }
 }
-
+exports.getSubjectsTeacher = async (req, res) => {
+  const subjectsPerTeacher = await Subjects.find({
+    teacher: req.params.idTeacher
+  })
+  if (!subjectsPerTeacher.length) {
+    return res.status(404).json({ msg: 'subjects not found' })
+  }
+  res.status(200).json(subjectsPerTeacher)
+}
 exports.createSubject = async (req, res) => {
   const newSubject = new Subjects(req.body)
   await newSubject.save()

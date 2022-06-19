@@ -9,10 +9,11 @@ exports.createTeacher = async (req, res) => {
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
   const { email, password } = req.body
   try {
+    console.log(req.body, 'teachers')
     // if email is already exists
     let teacher = await Teachers.findOne({ email })
     if (teacher) {
-      res.status(400).json({ msg: 'This teacher already exists' })
+      return res.status(400).json({ msg: 'This teacher already exists' })
     } else {
       teacher = new Teachers(req.body)
       // hash the pass
@@ -35,6 +36,7 @@ exports.createTeacher = async (req, res) => {
           res.json({ token })
         }
       )
+      return res.status(201).json({ msg: 'Teacher created' })
     }
   } catch (error) {
     console.log(error)
