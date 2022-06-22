@@ -9,7 +9,6 @@ exports.createStudent = async (req, res) => {
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() })
   const { email, password } = req.body
   try {
-    console.log(req.body, 'student')
     // if email is already exists
     let student = await Students.findOne({ email })
     if (student) {
@@ -19,7 +18,6 @@ exports.createStudent = async (req, res) => {
       // hash the pass
       const salt = await bcrypt.genSalt(10)
       student.password = await bcrypt.hash(password, salt)
-      await student.save()
       const payload = {
         student: {
           id: student.id
@@ -36,6 +34,7 @@ exports.createStudent = async (req, res) => {
           res.json({ token })
         }
       )
+      await student.save()
     }
   } catch (error) {
     console.log(error)

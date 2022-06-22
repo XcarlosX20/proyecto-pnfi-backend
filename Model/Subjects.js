@@ -20,6 +20,8 @@ const Subjects = mongoose.Schema(
       ref: 'Teachers',
       trim: true
     },
+    teacherName: String,
+    teacherEmail: String,
     shortId: {
       type: String,
       require: true

@@ -1,13 +1,14 @@
 const Subjects = require('../Model/Subjects')
 
 exports.getSubjectsStudents = async (req, res) => {
-  console.log(req.params)
   try {
     const subjectsPerEstudent = await Subjects.find({
       findStudent: req.params.idStudent
     })
     if (!subjectsPerEstudent.length) {
-      return res.status(404).json({ msg: 'subjects not found' })
+      return res
+        .status(404)
+        .json({ msg: "you don't have subjects added", alert: 'info' })
     }
     res.status(200).json(subjectsPerEstudent)
   } catch (error) {
@@ -19,18 +20,26 @@ exports.getSubjectsTeacher = async (req, res) => {
     teacher: req.params.idTeacher
   })
   if (!subjectsPerTeacher.length) {
-    return res.status(404).json({ msg: 'subjects not found' })
+    return res
+      .status(404)
+      .json({ msg: "you don't have any subject added", alert: 'info' })
   }
   res.status(200).json(subjectsPerTeacher)
+}
+exports.getOneSubjectStudent = async (req, res) => {
+  return
+}
+exports.getOneSubjectTeacher = async (req, res) => {
+  return
 }
 exports.createSubject = async (req, res) => {
   const newSubject = new Subjects(req.body)
   await newSubject.save()
-  res.status(201).json({ msg: 'subject created succesfully' })
+  res.status(201).json({ msg: 'subject created succesfully', newSubject })
 }
 
 exports.joinToSubject = async (req, res) => {
-  const shortId = 'iy1eg'
+  const { shortId } = req.params
   const newStudent = req.body
   try {
     const subject = await Subjects.findOne({ shortId })
@@ -50,7 +59,7 @@ exports.joinToSubject = async (req, res) => {
           students: [...subject.students, newStudent]
         }
       )
-      res.status(202).json({ msg: 'subject accepted' })
+      res.status(202).json({ msg: 'subject added' })
     }
   } catch (error) {
     console.log(error)

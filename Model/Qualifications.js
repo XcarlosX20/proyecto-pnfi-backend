@@ -12,17 +12,13 @@ const Qualifications = mongoose.Schema(
       trim: true
     },
     subject: { type: mongoose.Types.ObjectId, ref: 'Subjects', require: true },
-    teacher: {
-      name: String,
-      email: String,
-      teacherId: mongoose.Types.ObjectId
-    },
-    studentId: {
+    teacher: { type: mongoose.Types.ObjectId, ref: 'Teachers', require: true },
+    student: {
       type: mongoose.Types.ObjectId,
       require: true,
       ref: 'Students'
     },
-    Unit: String,
+    unit: String,
     quote: {
       type: String,
       require: false,

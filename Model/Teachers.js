@@ -20,8 +20,7 @@ const Teachers = mongoose.Schema(
     register: {
       type: Date,
       default: Date.now()
-    },
-    subjects: [{ name: String, shortId: String }]
+    }
   },
   { versionKey: false }
 )

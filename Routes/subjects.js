@@ -8,13 +8,22 @@ router.get(
   authStudent,
   subjectController.getSubjectsStudents
 )
-router.put('/', authStudent, subjectController.joinToSubject)
-
+router.put('/join/:shortId', authStudent, subjectController.joinToSubject)
+router.get(
+  '/students/:idSubject',
+  authTeacher,
+  subjectController.getOneSubjectStudent
+)
 // teacher
 router.get(
   '/teachers/:idTeacher',
   authTeacher,
   subjectController.getSubjectsTeacher
+)
+router.get(
+  '/teachers/:idSubject',
+  authTeacher,
+  subjectController.getOneSubjectTeacher
 )
 router.post('/', authTeacher, subjectController.createSubject)
 router.delete('/:id', authTeacher, subjectController.deleteSubject)
