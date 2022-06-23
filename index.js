@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const delay = require('express-delay')
 require('dotenv').config({ path: '.env' })
 const conectarDB = require('./config/db')
 conectarDB()
